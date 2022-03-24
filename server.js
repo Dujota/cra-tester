@@ -5,6 +5,9 @@ const logger = require('morgan');
 
 const app = express();
 
+require('dotenv').config()
+require('./config/database.js')
+
 app.use(logger('dev'));
 app.use(express.json());
 
@@ -18,6 +21,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 // Put API routes here, before the "catch all" route
+app.use('/api/orders', require('./routes/api/orders.js'));
 
 // The following "catch all" route (note the *)is necessary
 // for a SPA's client-side routing to properly work
